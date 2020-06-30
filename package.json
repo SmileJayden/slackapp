@@ -1,0 +1,12 @@
+{
+  "name": "slackapp",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/SmileJayden/slackapp.git",
+  "author": "SmileJayden <wkdwodud07@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@slack/web-api": "^5.10.0",
+    "prettier": "^2.0.5"
+  }
+}
