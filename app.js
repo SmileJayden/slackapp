@@ -37,11 +37,11 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 exports.__esModule = true;
 var web_api_1 = require("@slack/web-api");
-var dotenv_1 = require("dotenv");
-dotenv_1.config();
+var dotenv = require("dotenv");
+dotenv.config();
 console.log('process.env.SLACK_TOKEN', process.env.SLACK_TOKEN);
 var port = process.env.PORT;
-console.log("Your port is " + port);
+console.log("Your por!!!!!!!!!!!!!!!!!!!!!!!!!!t is " + port);
 // Create a new instance of the WebClient class with the token read from your environment variable
 var web = new web_api_1.WebClient(process.env.SLACK_TOKEN);
 // The current date

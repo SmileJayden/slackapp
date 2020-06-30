@@ -5,9 +5,6 @@ dotenv.config();
 
 console.log('process.env.SLACK_TOKEN', process.env.SLACK_TOKEN);
 
-const port = process.env.PORT;
-console.log(`Your port is ${port}`);
-
 // Create a new instance of the WebClient class with the token read from your environment variable
 const web = new WebClient(process.env.SLACK_TOKEN);
 

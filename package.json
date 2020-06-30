@@ -5,6 +5,9 @@
   "repository": "https://github.com/SmileJayden/slackapp.git",
   "author": "SmileJayden <wkdwodud07@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "dev": "tsc app.ts && node app.js"
+  },
   "dependencies": {
     "@slack/web-api": "^5.10.0",
     "dotenv": "^8.2.0",
