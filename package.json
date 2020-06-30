@@ -6,7 +6,7 @@
   "author": "SmileJayden <wkdwodud07@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "tsc app.ts && node app.js"
+    "dev": "tsc src/app.ts && node src/app.js"
   },
   "dependencies": {
     "@slack/web-api": "^5.10.0",
