@@ -70,13 +70,10 @@ async function getWantedLinks() {
       return '';
     });
 
-    console.log('typeof res', typeof res, res);
-
     if (res) {
       resumeLinks.push(WANTED_URL + res);
     }
   }
-  console.log('resumeLinks', resumeLinks);
 
   await page.close();
 
