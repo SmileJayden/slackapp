@@ -37,7 +37,7 @@ async function getWantedLinks() {
 
   await Promise.all([
     page.keyboard.press('Enter'),
-    page.waitForNavigation({ waitUntil: 'networkidle2', timeout: 3000 }),
+    page.waitForNavigation({ waitUntil: 'networkidle2', timeout: 10000 }),
   ]);
 
   // delay for transition
