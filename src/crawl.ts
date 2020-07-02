@@ -1,12 +1,15 @@
 import * as puppeteer from 'puppeteer';
 
-async function getWantedLinks() {
-  const browser = await puppeteer.launch({ headless: false });
-
-  const WANTED_URL = 'https://www.wanted.co.kr';
+async function getLinks() {
   const resumeLinks: string[] = [];
 
+  const browser = await puppeteer.launch({
+    headless: false,
+  });
+
   const page = await browser.newPage();
+  const WANTED_URL = 'https://www.wanted.co.kr';
+
   await page.goto(WANTED_URL + '/');
 
   // click 로그인하기
@@ -15,8 +18,8 @@ async function getWantedLinks() {
   );
 
   // Email 입력
-  if (process.env.EMAIL) {
-    await page.keyboard.type(process.env.EMAIL);
+  if (process.env.WANTED_EMAIL) {
+    await page.keyboard.type(process.env.WANTED_EMAIL);
   }
 
   // Email 입력 확인
@@ -31,8 +34,8 @@ async function getWantedLinks() {
   await page.focus('#MODAL_BODY > div > div > label');
 
   // 비밀번호 입력
-  if (process.env.PSWD) {
-    await page.keyboard.type(process.env.PSWD);
+  if (process.env.WANTED_PSWD) {
+    await page.keyboard.type(process.env.WANTED_PSWD);
   }
 
   await Promise.all([
@@ -60,6 +63,10 @@ async function getWantedLinks() {
       { timeout: 2000 }
     );
 
+    if (!resume) {
+      continue;
+    }
+
     const res = await resume.evaluate((resumeElement) => {
       const innerTextElem = resumeElement.querySelector(
         'div > h4 > span > span:last-child'
@@ -75,9 +82,68 @@ async function getWantedLinks() {
     }
   }
 
+  // 프로그래머스에서 땡겨오기 ^^@
+  const PROGRAMMERS_INIT_URL =
+    'https://business.programmers.co.kr/business/login';
+
+  const PROGRAMMERS_URL = 'https://business.programmers.co.kr';
+
+  await page.goto(PROGRAMMERS_INIT_URL);
+
+  // click 로그인하기
+  await page.click('#user_email');
+
+  // 프로그래머스 Email 입력
+  if (process.env.PROGRAMMERS_EMAIL) {
+    await page.keyboard.type(process.env.PROGRAMMERS_EMAIL);
+  }
+
+  await page.keyboard.press('Tab');
+
+  // 프로그래머스 비밀번호 입력
+  if (process.env.PROGRAMMERS_PSWD) {
+    await page.keyboard.type(process.env.PROGRAMMERS_PSWD);
+  }
+
+  await page.keyboard.press('Enter');
+
+  await page.waitForNavigation();
+
+  for (let i = 1; i < 10; i++) {
+    const resume = await page
+      .waitForSelector(
+        `#section_applications > div.applicants__index > div.tab-content.applications_contents > ul > li:nth-child(${i}) > table > tbody > tr > td.t-applicant > h4 > a`,
+        { timeout: 2000 }
+      )
+      .catch(() => {
+        return;
+      });
+
+    if (!resume) {
+      continue;
+    }
+
+    const res = await resume.evaluate((resumeElement) => {
+      const textContent = resumeElement.textContent;
+
+      if (textContent) {
+        if (/웹/.test(textContent)) {
+          return resumeElement.getAttribute('href');
+        }
+      }
+      return;
+    });
+
+    if (res) {
+      resumeLinks.push(PROGRAMMERS_URL + res);
+    }
+  }
+
   await page.close();
+
+  await browser.close();
 
   return resumeLinks;
 }
 
-export { getWantedLinks };
+export { getLinks };
