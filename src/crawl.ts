@@ -60,7 +60,7 @@ async function getLinks() {
   for (let i = 1; i < 10; i++) {
     const resume = await page.waitForSelector(
       `#app > div > div.Content-sc-4ql4l8-0.iEIrUP > div:nth-child(4) > div > div > div > div:nth-child(2) > ol > li:nth-child(${i}) > a`,
-      { timeout: 2000 }
+      { timeout: 10000 }
     );
 
     if (!resume) {
@@ -113,7 +113,7 @@ async function getLinks() {
     const resume = await page
       .waitForSelector(
         `#section_applications > div.applicants__index > div.tab-content.applications_contents > ul > li:nth-child(${i}) > table > tbody > tr > td.t-applicant > h4 > a`,
-        { timeout: 2000 }
+        { timeout: 10000 }
       )
       .catch(() => {
         return;
