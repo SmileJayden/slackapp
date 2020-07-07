@@ -4,7 +4,7 @@ async function getLinks() {
   const resumeLinks: string[] = [];
 
   const browser = await puppeteer.launch({
-    headless: false,
+    headless: true,
   });
 
   const page = await browser.newPage();
