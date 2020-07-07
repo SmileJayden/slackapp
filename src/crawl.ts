@@ -3,7 +3,7 @@ import crawlWanted from './crawlWanted';
 
 async function getLinks() {
   const browser = await puppeteer.launch({
-    headless: false,
+    headless: true,
   });
 
   const page = await browser.newPage();
