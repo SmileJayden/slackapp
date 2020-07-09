@@ -1,4 +1,4 @@
-async function getWantedLinks(page): Promise<any[]> {
+async function getWantedLinks(page: any): Promise<any[]> {
   const resumeLinks: string[] = [];
   const WANTED_URL = 'https://www.wanted.co.kr';
 
@@ -59,7 +59,7 @@ async function getWantedLinks(page): Promise<any[]> {
       continue;
     }
 
-    const res = await resume.evaluate((resumeElement) => {
+    const res = await resume.evaluate((resumeElement: Element) => {
       const innerTextElem = resumeElement.querySelector(
         'div > h4 > span > span:last-child'
       );

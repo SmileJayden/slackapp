@@ -1,4 +1,4 @@
-async function getProgrammersLinks(page): Promise<any[]> {
+async function getProgrammersLinks(page: any): Promise<any[]> {
   const resumeLinks: string[] = [];
   // 프로그래머스에서 땡겨오기 ^^@
   const PROGRAMMERS_INIT_URL =
@@ -41,7 +41,7 @@ async function getProgrammersLinks(page): Promise<any[]> {
       continue;
     }
 
-    const res = await resume.evaluate((resumeElement) => {
+    const res = await resume.evaluate((resumeElement: Element) => {
       const textContent = resumeElement.textContent;
 
       if (textContent) {
@@ -58,3 +58,5 @@ async function getProgrammersLinks(page): Promise<any[]> {
   }
   return resumeLinks;
 }
+
+export default getProgrammersLinks;
